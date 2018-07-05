@@ -21,3 +21,7 @@ Install the vagrant hosts updater plugin to update your hosts file while startin
 ```
 vagrant plugin install vagrant-hostsupdater
 ```
+
+## Known issues
+
+* Sometimes Git applications like GitHub Desktop and GitKraken can't do their work from a (samba) network drive due file permission issues. Run `chmod -R 777 /srv` from within the Vagrant box to reset file permissions.

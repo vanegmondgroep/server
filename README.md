@@ -9,6 +9,15 @@ This server is used at Van Egmond Groep to develop our applications. It's basica
 1. Navigate to the folder in your terminal or command prompt.
 1. Run `vagrant up` to start the server.
 1. Run `vagrant ssh` to login to the server.
+1. Run `vagrant halt` to stop the server.
+1. Run `vagrant up --provision` to reprovision the server.
 
 ## Accessing shared files
-Due to speed issues with shared drives using Vagrant/VirtualBox on Windows we've installed samba on the guest machine. To access the shared files navigate to `192.168.25.100`. You can clone any repository to the shared `srv` folder.
+shared files navigate to `192.168.25.100`. You can clone any repository to the shared `srv` folder.
+
+## Hosts updater
+Install the vagrant hosts updater plugin to update your hosts file while starting the development server. The server is then available via `app.local` in your browser. You can install this plugin using the command below (on your host machine):
+
+```
+vagrant plugin install vagrant-hostsupdater
+```

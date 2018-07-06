@@ -25,3 +25,7 @@ sudo service smbd restart
 
 # Setup hosts file
 sudo echo "127.0.0.1 db" >> /etc/hosts
+
+# Setup git configuration
+git config --global core.eol lf
+git config --global core.autocrlf input

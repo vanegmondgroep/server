@@ -3,6 +3,7 @@ This server is used at Van Egmond Groep to develop our applications. It's basica
 
 ## Requirements 
 * [Vagrant](https://www.vagrantup.com/) 
+* [VirtualBox](https://www.virtualbox.org/)
 
 ## Usage
 1. Clone this repository to your computer.
@@ -13,7 +14,12 @@ This server is used at Van Egmond Groep to develop our applications. It's basica
 1. Run `vagrant up --provision` to reprovision the server.
 
 ## Accessing shared files
-shared files navigate to `192.168.25.100`. You can clone any repository to the shared `srv` folder.
+To access the shared files navigate to:
+
+* Windows: `\\192.168.25.100` in File Explorer. 
+* MacOS / Linux: `smb://192.168.25.100` in Finder / File Manager.
+
+You can clone any repository to the shared `srv` folder.
 
 ## Hosts updater
 Install the vagrant hosts updater plugin to update your hosts file while starting the development server. The server is then available via `app.local` in your browser. You can install this plugin using the command below (on your host machine):
@@ -24,4 +30,4 @@ vagrant plugin install vagrant-hostsupdater
 
 ## Known issues
 
-* Sometimes Git applications like GitHub Desktop and GitKraken can't do their work from a (samba) network drive due file permission issues. Run `chmod -R 777 /srv` from within the Vagrant box to reset file permissions.
+* Sometimes Git applications like GitHub Desktop and GitKraken can't do their work from a (samba) network drive due file permission issues. Run `sudo chmod -R 777 /srv` from within the Vagrant box to reset file permissions.

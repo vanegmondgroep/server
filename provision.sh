@@ -1,30 +1,36 @@
 #!/usr/bin/env bash
+
+# Install packages
 sudo apt-get update
-sudo apt-get install -y samba zip php7.2 php7.2-cli php7.2-mbstring php7.2-curl php7.2-mysql mysql-client
+sudo apt-get install -y samba zip mysql-client python-pip
 
-# Install Docker Compose
-sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+# Install Docker Composes
+sudo pip install docker-compose
 
-# Install Composer
-sudo wget https://getcomposer.org/composer.phar
-sudo mv composer.phar /bin/composer
-sudo chmod +x /bin/composer
+# Add Van Egmond user
+sudo useradd -m vanegmond
+sudo usermod -aG sudo vanegmondd
+sudo usermod -aG docker vanegmond
+sudo cp -R /home/vagrant/.ssh /home/vanegmond/.ssh
+sudo touch /home/vanegmond/.bash_profile && echo "cd /srv" >> /home/vanegmond/.bash_profile
+sudo chown -R vanegmond:vanegmond /srv
+sudo chown -R vanegmond:vanegmond /home/vanegmond
+sudo chsh -s /bin/bash vanegmond
 
-# Setup Docker Swarm
-sudo docker swarm init --advertise-addr 192.168.25.100
+echo 'vanegmond ALL=(ALL) NOPASSWD: ALL' | sudo tee --append /etc/sudoers
 
 # Setup samba
-sudo chown -R nobody.nogroup /srv
-sudo chmod -R 777 /srv
-sudo chgrp nogroup /srv
-sudo chmod g+s /srv
-
 sudo mv -f /home/vagrant/smb.conf /etc/samba/smb.conf
 sudo service smbd restart
 
+sudo echo -e "secret\nsecret" | sudo smbpasswd -s -a vanegmond
+
 # Setup hosts file
 sudo echo "127.0.0.1 db" >> /etc/hosts
+
+# Setup backup script
+sudo mv -f /home/vagrant/backup.sh /usr/local/bin/backup
+sudo chmod +x /usr/local/bin/backup.sh
 
 # Setup git configuration
 git config --global core.eol lf

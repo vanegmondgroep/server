@@ -30,7 +30,7 @@ sudo echo "127.0.0.1 db" >> /etc/hosts
 
 # Setup backup script
 sudo mv -f /home/vagrant/backup.sh /usr/local/bin/backup
-sudo chmod +x /usr/local/bin/backup.sh
+sudo chmod +x /usr/local/bin/backup
 
 # Setup git configuration
 git config --global core.eol lf

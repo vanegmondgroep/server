@@ -8,7 +8,7 @@ sudo apt-get install -y samba zip mysql-client python-pip
 sudo pip install docker-compose
 
 # Add Van Egmond user
-sudo useradd -m vanegmond
+sudo useradd -u 7007 -m vanegmond
 sudo usermod -aG sudo vanegmondd
 sudo usermod -aG docker vanegmond
 sudo cp -R /home/vagrant/.ssh /home/vanegmond/.ssh
